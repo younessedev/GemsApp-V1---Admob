@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>3D Panels</title>
+    <link rel="stylesheet" href="libs/framework7/dist/css/framework7.material.min.css">
+    <link rel="stylesheet" href="libs/framework7/dist/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="../dist/framework7.3dpanels.css">
+	
+	<style>
+	#container {
+  margin: auto;
+    width: 50%;
+  width: 200px;
+  height: 200px;
+  position: relative;
+      }
+  .button-start{
+     background:url(img/start-button.png);
+    background-repeat: no-repeat;
+	margin : 50px;
+    width: 150px;
+    height:50px;
+  }
+	  body {
+	      font-family: "Supercell-Magic";
+
+	  }
+	</style>
+	
+    <style>
+	
+	/* unes code */
+      body {
+        background: #00ff00 url("img/firstbackground.jpg") no-repeat fixed center; 
+        
+      }
+      .panel .page, .panel .pages, .panel {
+        background: none;
+      }
+      .panel .list-block ul {
+        background: none;
+        border:none;
+      }
+      .panel .list-block .item-link {
+        color:#fff;
+      }
+      .panel .list-block .item-link:active {
+        background: rgba(255,255,255,0.2);
+      }
+      .panel .list-block .item-inner {
+        border-bottom-color:rgba(255,255,255,0.2);
+      }
+      .panel .content-block, .panel .content-block-title {
+        color:#fff;
+      }
+	  /* unes code */
+	  .navbar{
+		      background-image: url("img/navbar.jpg");
+		  }
+		  
+      /* unes code */
+	  .page{
+		      background-image: url("img/content.jpg");
+		  }
+	   
+	   input#buttongems{
+    background:url(img/button-gems.png);
+    background-repeat: no-repeat;
+    width: 100 px;
+    height: 50 px;
+}
+
+	   input#buttonchest{
+    background:url(img/button-chest.png);
+    background-repeat: no-repeat;
+    width: 100 px;
+    height: 50 px;
+}
+
+
+		  
+      
+		  
+    </style>
+  </head>
+  <body>
+    <div class="statusbar-overlay"></div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-left panel-reveal">
+      <div class="view">
+        <div class="pages">
+          <div class="page">
+            <div class="page-content">
+              <div class="list-block">
+                <ul>
+                  <li><a href="#" class="item-content item-link">
+                      <div class="item-inner">
+                        Pro Gems
+                      </div></a></li>
+                  <li><a href="#" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Gems
+                      </div></a></li>
+                  <li><a href="#" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Gems #2
+                      </div></a></li>
+                  <li><a href="#" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Gems #3
+                      </div></a></li>
+                  <li><a href="#" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Gems #4
+                      </div></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-right panel-reveal">
+      <div class="view">
+        <div class="pages">
+          <div class="page">
+            <div class="page-content">
+              <div class="list-block">
+                <ul>
+                  <li><a href="ok.html" class="item-content item-link">
+                      <div class="item-inner">
+                        Pro Chest
+                      </div></a></li>
+                  <li><a href="ok2.html" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Chest
+                      </div></a></li>
+                  <li><a href="#" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Chest #2
+                      </div></a></li>
+                  <li><a href="#" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Chest #3
+                      </div></a></li>
+                  <li><a href="#" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Chest #4
+                      </div></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="views">
+      <div class="view view-main">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center sliding">
+			<div class="app-title">
+			<img src="img/logo.png"></img>Gems & Chest<img src="img/logo.png"></img>
+			</div>
+			</div>
+          </div>
+        </div>
+        <div class="pages navbar-through toolbar-through ">
+          <div data-page="index" class="page">
+            <div class="page-content">
+              <div class="content-block">
+                <div class="content-block-inner ">
+                  <p>
+				  
+                  <div id="container"></div>
+				  <button id="button-start" name="submit" class="button-start" onclick="start_button()">
+				  </p>
+                </div>
+              </div>
+              <div class="content-block">
+                <div class="row">
+                  <div class="col-50"><input id="buttongems" data-panel="left" name="submit" class="button open-panel"></div>
+				 <div class="col-50"> <input id="buttonchest" data-panel="right" name="submit" class="button open-panel"></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="libs/framework7/dist/js/framework7.min.js"></script>
+    <script src="../dist/framework7.3dpanels.js"></script>
+	<script src="js/progressbar.js"></script>
+	
+	<script>
+	// progressbar.js@1.0.0 version is used
+// Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
+
+var bar = new ProgressBar.Circle(container, {
+  color: '#00ff00',
+  // This has to be the same size as the maximum width to
+  // prevent clipping
+  strokeWidth: 10,
+  trailWidth: 1,
+  easing: 'easeInOut',
+  duration: 14000,
+  text: {
+    autoStyleContainer: false
+  },
+  from: { color: '#17FF00', width: 10 },
+  to: { color: '#17FF00', width: 10 },
+  // Set default step function for all animate calls
+  step: function(state, circle) {
+    circle.path.setAttribute('stroke', state.color);
+    circle.path.setAttribute('stroke-width', state.width);
+
+    var value = Math.round(circle.value() * 100);
+    if (value === 0) {
+      circle.setText('');
+    } else {
+      circle.setText(value+" Gems");
+    }
+
+  }
+});
+
+
+
+var x = 0;
+
+function start_button(){
+document.getElementById('button-start').disabled = true;
+x = x +0.1;
+bar.animate(x); 
+
+ setTimeout(function() {
+ document.getElementById('button-start').disabled = false;
+    }, 30000);
+	
+}
+	</script>
+		
+    <script>
+      var myApp = new Framework7({swipePanel:'left'});
+      var mainView = myApp.addView('.view-main');
+    </script>
+  </body>
+</html>

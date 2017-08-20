@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>3D Panels</title>
+    <link rel="stylesheet" href="libs/framework7/dist/css/framework7.material.min.css">
+    <link rel="stylesheet" href="libs/framework7/dist/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="../dist/framework7.3dpanels.css">
+	
+	<style>
+	
+	#imaga{
+	
+	}
+	.gemschest{
+	margin-bottom : 0px;
+    border-radius: 25px;
+  background-color:transparent;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+	}
+	
+
+
+	#Animation {
+  margin: auto;
+  width: 100%;
+  height : 50;
+  border-radius: 25px;
+  background-color:transparent;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+  
+  }
+	
+	#container {
+  margin: auto;
+  width: 50%;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border-radius: 25px;
+  background-color:transparent;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+}
+ 
+ .imgun{
+  background:url(img/chest1.png);
+    width: 50px;
+    height: 50px;
+ }
+ 
+ .imgdeux{
+  background:url(img/chest2.png);
+    width: 50px;
+    height: 50px;
+ }
+ 
+ .imgtrois{
+  background:url(img/chest3.png);
+    width: 50px;
+    height: 50px;
+ }
+ 
+ 
+
+ /* .button-start{
+     background:url(img/start-button.png);
+    background-repeat: no-repeat;
+    width: 150px;
+    height:50px;
+	text-align: center; 
+  }
+  
+  .buttonwithdraw{
+   background:url(img/buttonwithdraw.png);
+    background-repeat: no-repeat;
+    width: 150px;
+    height:50px;
+	text-align: center; 
+  }
+  */
+  
+  .appsbutton{
+  background:url(img/moreapps.png);
+   background-repeat: no-repeat;
+    width: 150px;
+    height:50px;
+	text-align: center; 
+  }
+  
+  .buttonstartclass {
+  text-align: center; 
+  }
+	  body {
+	      font-family: "Supercell-Magic";
+
+	  }
+	</style>
+	
+    <style>
+	
+	/* unes code */
+      body {
+        background: #00ff00 url("img/firstbackground.jpg") no-repeat fixed center; 
+        
+      }
+      .panel .page, .panel .pages, .panel {
+        background: none;
+      }
+      .panel .list-block ul {
+        background: none;
+        border:none;
+      }
+      .panel .list-block .item-link {
+        color:#fff;
+      }
+      .panel .list-block .item-link:active {
+        background: rgba(255,255,255,0.2);
+      }
+      .panel .list-block .item-inner {
+        border-bottom-color:rgba(255,255,255,0.2);
+      }
+      .panel .content-block, .panel .content-block-title {
+        color:#fff;
+      }
+	  /* unes code */
+	  .navbar{
+		      background-image: url("img/navbar.jpg");
+		  }
+		  
+      /* unes code */
+	  .page{
+		      background-image: url("img/content.jpg");
+		  }
+		  
+      .withdrawpopup {
+	  background-image: url("img/content.jpg");
+	  width: 100%;
+      height: 100%;
+	  }
+	   
+	   input#buttongems{
+    background:url(img/button-gems.png);
+    background-repeat: no-repeat;
+    width: 100 px;
+    height: 50 px;
+}
+
+	   input#buttonchest{
+    background:url(img/button-chest.png);
+    background-repeat: no-repeat;
+    width: 100 px;
+    height: 50 px;
+}
+
+
+		  
+      
+		  
+    </style>
+
+        <script>
+  // fix wp8 view port issue, see:
+  // https://github.com/floatinghotpot/cordova-admob-pro/issues/109
+  // https://coderwall.com/p/zk_2la/responsive-design-in-ie-10-on-windows-phone-8
+  // http://stackoverflow.com/questions/24007577/windows-phone-8-viewport-issue
+(function() {
+  if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+    var msViewportStyle = document.createElement("style");
+    msViewportStyle.appendChild(
+      document.createTextNode("@-ms-viewport{width:auto!important}")
+    );
+    document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+  }
+})();
+</script>
+
+<!-- optional -->
+<script type="text/javascript" src="js/jquery-1.9.js"></script>
+
+<!-- must-have, which will be created by cordova prepare/build -->
+<script type="text/javascript" src="cordova.js"></script>
+
+
+
+  </head>
+  <body>
+
+  <script>
+  // place our admob ad unit id here
+  var admobid = {};
+  if( /(android)/i.test(navigator.userAgent) ) {
+    admobid = { // for Android
+      banner: 'ca-app-pub-4129480395944210/8338012800',
+      interstitial: 'ca-app-pub-4129480395944210/1328739563',
+      rewardvideo: 'ca-app-pub-4129480395944210/9750155064',
+    };
+  } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+    admobid = { // for iOS
+      banner: 'ca-app-pub-3940256099942544/4480807092',
+      interstitial: 'ca-app-pub-3940256099942544/4411468910',
+      rewardvideo: 'ca-app-pub-3940256099942544/1712485313',
+    };
+  } else {
+    admobid = { // for Windows Phone
+      banner: 'ca-app-pub-6869992474017983/8878394753',
+      interstitial: 'ca-app-pub-6869992474017983/1355127956',
+      rewardvideo: '',
+    };
+  }
+
+ 
+ 
+
+  function onDeviceReady() {
+    if (! AdMob) { alert( 'admob plugin not ready' ); return; }
+
+    initAd();
+ 
+  }
+
+  function initAd(){
+    AdMob.getAdSettings(function(info){
+      console.log('adId: ' + info.adId + '\n' + 'adTrackingEnabled: ' + info.adTrackingEnabled);
+    }, function(){
+      console.log('failed to get user ad settings');
+    });
+
+    AdMob.setOptions({
+      // adSize: 'SMART_BANNER',
+      position: AdMob.AD_POSITION.BOTTOM_CENTER,
+      isTesting: false, // set to true, to receiving test ad for testing purpose
+      bgColor: 'black', // color name, or '#RRGGBB'
+      // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
+      // offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
+    });
+
+   
+
+    /* $('#btn_create').click(createSelectedBanner);
+    $('#btn_remove').click(function(){
+      AdMob.removeBanner();
+    });
+
+    $('#btn_show').click(showBannerAtPosition);
+    $('#btn_hide').click(function(){
+      AdMob.hideBanner();
+    });
+
+    // test interstitial ad
+    $('#btn_prepare').click(function(){
+      AdMob.prepareInterstitial({
+        adId:admobid.interstitial,
+        autoShow: $('#autoshow').is(':checked'),
+      });
+    });
+
+    $('#btn_showfull').click(function(){
+      AdMob.showInterstitial();
+    });
+
+    // test rewarded video ad
+    $('#btn_preparevideo').click(function(){
+      AdMob.prepareRewardVideoAd({
+        adId:admobid.rewardvideo,
+        autoShow: $('#autoshowvideo').is(':checked'),
+      });
+    });
+
+    $('#btn_showvideo').click(function(){
+      AdMob.showRewardVideoAd();
+    }); */
+
+    // test case for #256, https://github.com/floatinghotpot/cordova-admob-pro/issues/256
+    $(document).on('backbutton', function(){
+      if(window.confirm('Are you sure to quit?')) navigator.app.exitApp();
+    });
+
+    // test case #283, https://github.com/floatinghotpot/cordova-admob-pro/issues/283
+    $(document).on('resume', function(){
+      AdMob.showInterstitial();
+    });
+  }
+
+  // test the webview resized properly
+  $(window).resize(function(){
+    $('#textinfo').html('web view: ' + $(window).width() + " x " + $(window).height());
+  });
+
+  $(document).ready(function(){
+    // on mobile device, we must wait the 'deviceready' event fired by cordova
+    if(/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent)) {
+      document.addEventListener('deviceready', onDeviceReady, false);
+    } else {
+      onDeviceReady();
+    }
+  });
+
+</script>
+
+
+
+    <div class="statusbar-overlay"></div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-left panel-reveal">
+      <div class="view">
+        <div class="pages">
+          <div class="page">
+            <div class="page-content">
+              <div class="list-block">
+                <ul>
+                  <li><a href="index.html" class="item-content item-link">
+                      <div class="item-inner">
+                        Free Gems
+                      </div></a></li>
+                  <li><a href="progems.html" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Gems <img src="img/logo.png">
+                      </div></a></li>
+             
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-right panel-reveal">
+      <div class="view">
+        <div class="pages">
+          <div class="page">
+            <div class="page-content">
+              <div class="list-block">
+                <ul>
+                  <li><a href="index.html" class="item-content item-link">
+                      <div class="item-inner">
+                        Pro Chest
+                      </div></a></li>
+                  <li><a href="prochest.html" class="item-content item-link">
+                      <div class="item-inner">
+                        Ultimate Chest <img src="img/logo.png">
+                      </div></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="views">
+      <div class="view view-main">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center sliding">
+			<div class="app-title">
+			<img src="img/logo.png"></img>Gems & Chest<img src="img/logo.png"></img>
+			</div>
+			</div>
+          </div>
+        </div>
+        <div class="pages navbar-through toolbar-through ">
+          <div data-page="index" class="page">
+            <div class="page-content">
+			
+			
+			
+                <div class="content-block">
+                <div class="content-block-inner ">
+             
+				  <p class="buttons-row">
+                  <a href="#" class="button button-raised button-fill color-lightblue">About</a>
+                  <a href="#" class="button button-raised button-fill color-lightblue open-popup" data-popup=".popup-apps" >Apps</a>
+                  <a href="#" class="button button-raised button-fill color-lightblue open-popup" data-popup=".popup-profile" >Profile</a>
+                  </p>
+				  
+				  
+		           <div id="Animation">
+				   
+				   <div id="imaga"  class="buttons-row"> 
+				   
+				   
+				   <button id="button-startun" name="submit" onclick="start_buttonun()" class="imgun" ></button>
+				   
+				   <button id="button-startdeux" name="submit" onclick="start_buttondeux()" class="imgdeux" ></button>
+				   
+				   <button id="button-starttrois" name="submit" onclick="start_buttontrois()" class="imgtrois" ></button>
+					
+				   
+				   
+				   
+				   </div>
+				   
+				   </div>
+				   
+				   
+				  
+                </div>
+				
+				<div id="container">
+                </div>
+				   
+				   
+				    <p class="buttons-row">
+				   <button id="buttonwithdraw" name="submit" data-popup=".popup-about" class="button button-raised button-fill color-lightgreen open-popup">Withdraw</button>
+				  </p>
+				  
+				  
+     				  
+                </div>
+			  
+			  
+			  
+			  
+			  
+			  <div class="gemschest">
+                <div class="row">
+                  <div class="col-50"><a href="#" data-panel="left"  class="button button-big button-fill open-panel">Gems</a></div>
+				  <div class="col-50"><a href="#" data-panel="right" class="button button-big button-fill open-panel">Chest</a></div>
+		      </div>
+              </div>
+			  
+			  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	
+	<div class="popup popup-about">
+	<div class="withdrawpopup">
+      <p><a href="#" class="close-popup">Close</a></p>
+	  <p>You Can Withdraw Gems Once You Reach 15,000 amount.</p>
+	  <p>We Will Send Gems To Your Email Each Week</p>
+  </div>
+  </div>
+ 
+   	<div class="popup popup-apps">
+	<div class="withdrawpopup">	
+	  <p><a href="#" class="close-popup">Close</a></p>
+	  
+  </div>
+  </div>
+  
+	<div class="popup popup-profile">
+	<div class="withdrawpopup">
+	  <div class="content-block-title">Fill Your Profile</div>
+<div class="list-block">
+  <ul>
+    <!-- Text inputs -->
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-title label">Name</div>
+          <div class="item-input">
+            <input type="text" placeholder="Your name">
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-title label">E-mail</div>
+          <div class="item-input">
+            <input type="email" placeholder="E-mail">
+          </div>
+        </div>
+      </div>
+    </li>
+	<li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <a href="#" class="button active close-popup">Save</a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </div>
+  </div>
+  
+
+
+  
+    <script src="libs/framework7/dist/js/framework7.min.js"></script>
+    <script src="../dist/framework7.3dpanels.js"></script>
+	<script src="js/progressbar.js"></script>
+	
+<script>
+
+// chartboost
+
+
+// alert
+
+var myApp = new Framework7();
+ 
+var $$ = Dom7;
+ 
+ 
+
+
+
+
+
+document.getElementById("container").style.backgroundImage = "url('img/earn.png')";
+
+
+document.getElementById('button-startdeux').disabled = true;
+document.getElementById('button-starttrois').disabled = true;
+
+
+
+
+
+
+// progressbar.js@1.0.0 version is used
+// Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
+
+var bar = new ProgressBar.Circle(container, {
+  color: '#E71D36',
+  // This has to be the same size as the maximum width to
+  // prevent clipping
+  strokeWidth: 10,
+  trailWidth: 1,
+  trailColor: '#E71D36',
+  easing: 'easeInOut',
+  duration: 14000,
+  text: {
+    autoStyleContainer: false
+  },
+  from: { color: '#E71D36', width: 10 },
+  to: { color: '#E71D36', width: 10 },
+  // Set default step function for all animate calls
+  step: function(state, circle) {
+    circle.path.setAttribute('stroke', state.color);
+    circle.path.setAttribute('stroke-width', state.width);
+
+    var value = Math.round(circle.value() * 1000);
+    if (value === 0) {
+      circle.setText('');
+    } else {
+      circle.setText(value+" Chest");
+    }
+
+  }
+});
+
+
+
+var x = 0;
+
+
+// imgun
+function start_buttonun(){
+
+      AdMob.prepareInterstitial({
+        adId:admobid.interstitial,
+        autoShow: $('#autoshow').is(':checked'),
+      });
+
+     
+
+
+document.getElementById("container").style.backgroundImage = 'none';
+
+document.getElementById('button-startun').disabled = true;
+x = x +0.1;
+bar.animate(x); 
+
+ setTimeout(function() {
+  
+  var modal = myApp.modal({
+    title: 'Congratulations',
+    text: 'You Won 100 Gems',
+    buttons: [
+      {
+        text: 'Earn More !'
+      },
+     
+    ]
+  })
+  myApp.swiper($$(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});
+
+
+  AdMob.showInterstitial();
+ document.getElementById('button-startdeux').disabled = false;
+    }, 30000);
+	
+}
+
+
+
+// imgdeux
+function start_buttondeux(){
+AdMob.prepareInterstitial({
+        adId:admobid.interstitial,
+        autoShow: $('#autoshow').is(':checked'),
+      });
+document.getElementById("container").style.backgroundImage = 'none';
+
+document.getElementById('button-startdeux').disabled = true;
+x = x +0.1;
+bar.animate(x); 
+
+ setTimeout(function() {
+ 
+  var modal = myApp.modal({
+    title: 'Congratulations',
+    text: 'You Won 100 Gems',
+    buttons: [
+      {
+        text: 'Earn More !'
+      },
+     
+    ]
+  })
+  myApp.swiper($$(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});
+   AdMob.showInterstitial();
+ document.getElementById('button-starttrois').disabled = false;
+    }, 30000);
+	
+}
+
+
+
+// imgtrois
+function start_buttontrois(){
+AdMob.prepareInterstitial({
+        adId:admobid.interstitial,
+        autoShow: $('#autoshow').is(':checked'),
+      });
+document.getElementById("container").style.backgroundImage = 'none';
+
+document.getElementById('button-starttrois').disabled = true;
+x = x +0.1;
+bar.animate(x); 
+
+ setTimeout(function() {
+ 
+  var modal = myApp.modal({
+    title: 'Congratulations',
+    text: 'You Won 100 Gems',
+    buttons: [
+      {
+        text: 'Earn More !'
+      },
+     
+    ]
+  })
+  myApp.swiper($$(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});  
+     AdMob.showInterstitial();
+
+ document.getElementById('button-startun').disabled = false;
+    }, 30000);
+	
+}
+
+
+
+
+
+
+
+	</script>
+      <script>
+      var myApp = new Framework7({swipePanel:'left'});
+      var mainView = myApp.addView('.view-main');
+    </script>
+
+
+  </body>
+</html>
